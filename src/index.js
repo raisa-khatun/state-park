@@ -12,7 +12,7 @@ class Gmaps extends React.Component {
         // so Google Maps can invoke it
         window.initMap = this.initMap;
         // Asynchronously load the Google Maps script, passing in the callback reference
-        loadJS('https://maps.googleapis.com/maps/api/js?key=AIzaSyC1ECFC4cuXUALXznOWLtXOL8korpYK3_E&callback=initMap')
+        loadJS('https://maps.googleapis.com/maps/api/js?key=give your key&callback=initMap')
     }
 
     initMap() {
