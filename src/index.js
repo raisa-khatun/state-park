@@ -2,66 +2,37 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-class Square extends React.Component {
-  render() {
-    return (
-      <button className="square">
-        {/* TODO */}
-      </button>
-    );
-  }
+
+
+class Gmaps extends React.Component {
+
+   
+    componentDidMount() {
+        // Connect the initMap() function within this class to the global window context,
+        // so Google Maps can invoke it
+        window.initMap = this.initMap;
+        // Asynchronously load the Google Maps script, passing in the callback reference
+        loadJS('https://maps.googleapis.com/maps/api/js?key=AIzaSyC1ECFC4cuXUALXznOWLtXOL8korpYK3_E&callback=initMap')
+    }
+
+    initMap() {
+        map = new google.maps.Map(this.refs.map.getDOMNode(), { });
+    }
+
+    render() {
+            return (
+                <div>
+                   
+                    <div ref="map" style="height: '500px', width: '500px'"> <⁄div>
+                <⁄div>
+            );
+    }
 }
 
-class Board extends React.Component {
-  renderSquare(i) {
-    return <Square />;
-  }
-
-  render() {
-    const status = 'Next player: X';
-
-    return (
-      <div>
-        <div className="status">{status}</div>
-        <div className="board-row">
-          {this.renderSquare(0)}
-          {this.renderSquare(1)}
-          {this.renderSquare(2)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(3)}
-          {this.renderSquare(4)}
-          {this.renderSquare(5)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(6)}
-          {this.renderSquare(7)}
-          {this.renderSquare(8)}
-        </div>
-      </div>
-    );
-  }
+function loadJS(src) {
+    var ref = window.document.getElementsByTagName("script")[0];
+    var script = window.document.createElement("script");
+    script.src = src;
+    script.async = true;
+    ref.parentNode.insertBefore(script, ref);
 }
-
-class Game extends React.Component {
-  render() {
-    return (
-      <div className="game">
-        <div className="game-board">
-          <Board />
-        </div>
-        <div className="game-info">
-          <div>{/* status */}</div>
-          <ol>{/* TODO */}</ol>
-        </div>
-      </div>
-    );
-  }
-}
-
-// ========================================
-
-ReactDOM.render(
-  <Game />,
-  document.getElementById('root')
-);
